@@ -1,0 +1,65 @@
+services:
+  # 1. Spring Boot User Management Service (Backend API)
+  - type: web
+    name: apex-identity-backend
+    runtime: docker
+    dockerfilePath: ./user-management-service/Dockerfile
+    dockerContext: ./user-management-service
+    plan: free
+    healthCheckPath: /api/v2/users
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: postgres
+      - key: DB_HOST
+        fromDatabase:
+          name: apex-identity-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: apex-identity-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: apex-identity-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: apex-identity-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: apex-identity-db
+          property: password
+      - key: IDENTITY_PROVIDER_ACTIVE
+        value: NEW
+      - key: IDENTITY_PROVIDER_NEW_IDP_MOCK_MODE
+        value: "true"
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_USERNAME
+        sync: false
+      - key: SMTP_PASSWORD
+        sync: false
+
+  # 2. React Profile Portal (Frontend SPA + Nginx Proxy)
+  - type: web
+    name: apex-identity-portal
+    runtime: docker
+    dockerfilePath: ./profile-portal/Dockerfile
+    dockerContext: ./profile-portal
+    plan: free
+    envVars:
+      - key: BACKEND_URL
+        fromService:
+          type: web
+          name: apex-identity-backend
+          property: host
+
+databases:
+  # Managed PostgreSQL Database
+  - name: apex-identity-db
+    databaseName: usermanagement
+    user: postgres
+    plan: free

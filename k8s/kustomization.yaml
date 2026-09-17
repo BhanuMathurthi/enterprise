@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: enterprise-identity
+
+resources:
+  - namespace.yaml
+  - configmap.yaml
+  - secret.yaml
+  - postgres-statefulset.yaml
+  - backend-deployment.yaml
+  - frontend-deployment.yaml
+  - ingress.yaml
+  - network-policy.yaml
+
+commonLabels:
+  app.kubernetes.io/part-of: identity-migration
+  app.kubernetes.io/managed-by: kustomize

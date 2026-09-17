@@ -1,0 +1,64 @@
+server:
+  port: 8080
+  forward-headers-strategy: framework
+
+spring:
+  application:
+    name: user-management-service
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:usermanagement}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 30000
+      connection-timeout: 20000
+      max-lifetime: 1800000
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        jdbc:
+          batch_size: 25
+  mail:
+    host: ${SMTP_HOST:smtp.gmail.com}
+    port: ${SMTP_PORT:587}
+    username: ${SMTP_USERNAME:}
+    password: ${SMTP_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+
+# Enterprise Identity Provider Migration Configuration
+identity:
+  provider:
+    # Active strategy: "NEW" (Third-Party Identity Platform) or "LEGACY" (Old Identity Provider)
+    active: NEW
+    new-idp:
+      base-url: http://${IDP_HOST:localhost}:8080/mock-idp
+      api-token: ssws-demo-enterprise-admin-token
+      issuer: https://identity.enterprise.internal/oauth2/default
+      client-id: enterprise-user-management-confidential
+      mock-mode: true
+    legacy:
+      base-url: http://${LEGACY_IDP_HOST:localhost}:8080/legacy-idp
+      api-token: legacy-shared-secret
+
+logging:
+  level:
+    root: INFO
+    com.enterprise.usermanagement: DEBUG
+    org.springframework.security: INFO

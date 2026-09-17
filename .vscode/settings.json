@@ -1,0 +1,4 @@
+{
+    "github.copilot.chat.responsesApi.promptCacheKey.enabled": false,
+    "java.configuration.updateBuildConfiguration": "interactive"
+}

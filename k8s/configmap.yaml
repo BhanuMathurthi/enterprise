@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: identity-service-config
+  namespace: enterprise-identity
+data:
+  SPRING_PROFILES_ACTIVE: "production"
+  IDENTITY_PROVIDER_ACTIVE: "NEW"
+  IDENTITY_NEW_IDP_BASE_URL: "https://enterprise-idp.identity.corp.internal/api/v1"
+  IDENTITY_NEW_IDP_ISSUER: "https://enterprise-idp.identity.corp.internal/oauth2/default"
+  IDENTITY_NEW_IDP_CLIENT_ID: "enterprise-user-management-confidential"
+  IDENTITY_NEW_IDP_MOCK_MODE: "false"
+  IDENTITY_LEGACY_BASE_URL: "https://legacy-idp.legacy.corp.internal/api/v1"
+  VITE_API_BASE_URL: "/api"
+  VITE_IDP_ISSUER: "https://enterprise-idp.identity.corp.internal/oauth2/default"
+  VITE_IDP_CLIENT_ID: "enterprise-profile-portal-public"
+  VITE_IDP_REDIRECT_URI: "https://profile.corp.enterprise.com/login/callback"
