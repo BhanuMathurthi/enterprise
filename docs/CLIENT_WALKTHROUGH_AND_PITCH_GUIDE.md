@@ -21,18 +21,20 @@ Enterprises managing legacy IT systems face a critical dilemma when modernizing 
 
 ## 2. Live Client Access Information
 
-The client can access the live application directly from any desktop, tablet, or mobile browser:
+The client can access the live application directly from any desktop, tablet, or mobile browser without requiring tunnel passwords or local setup:
 
-| Portal Section | Live URL | Description |
+| Portal Section | Cloud 24/7 Production URL | Local Temporary Relay |
 | :--- | :--- | :--- |
-| **Main Portal / Manage Profile** | [https://apex-identity-demo.loca.lt/profile](https://apex-identity-demo.loca.lt/profile) | Employee directory view and real-time profile attribute synchronization |
-| **Employee Registration** | [https://apex-identity-demo.loca.lt/register](https://apex-identity-demo.loca.lt/register) | Greenfield profile creation and identity platform staging |
-| **Partner & Guest Invitations** | [https://apex-identity-demo.loca.lt/legacy-demo](https://apex-identity-demo.loca.lt/legacy-demo) | Dispatch real verified invitation emails to personal or corporate inboxes |
+| **Main Portal / Manage Profile** | `https://<your-cloud-domain>/profile` | `https://apex-identity-demo.loca.lt/profile` |
+| **Employee Registration** | `https://<your-cloud-domain>/register` | `https://apex-identity-demo.loca.lt/register` |
+| **Partner & Guest Invitations** | `https://<your-cloud-domain>/legacy-demo` | `https://apex-identity-demo.loca.lt/legacy-demo` |
 
-> [!NOTE]
-> **Localtunnel First-Time Verification Notice**:
-> When opening `https://apex-identity-demo.loca.lt` for the first time, Localtunnel may present a security prompt asking for the "Tunnel IP Password".
-> Simply enter the host IP: **`125.62.195.166`** (or click the button provided on screen) to enter the portal.
+> [!TIP]
+> **Cloud Production (24/7 Availability)**:
+> When deployed to Render or Railway via the included [`render.yaml`](file:///Users/bhanu/Documents/ep/render.yaml), the application runs 24/7 with zero passwords and zero downtime. See [Walkthrough Guide](file:///Users/bhanu/.gemini/antigravity-ide/brain/d830b1dd-f9b4-485b-8f85-fc8bca747fd4/walkthrough.md) for full instructions.
+>
+> **Localtunnel Notice (Local Sharing Only)**:
+> If testing locally via `./share.sh`, Localtunnel requires the host's current public IP (run `curl -s https://loca.lt/mytunnelpassword`) as an initial security prompt. Cloud deployments do not have this requirement.
 
 ---
 
