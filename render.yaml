@@ -8,6 +8,8 @@ services:
     plan: free
     healthCheckPath: /api/v2/users
     envVars:
+      - key: PORT
+        value: "8080"
       - key: SPRING_PROFILES_ACTIVE
         value: postgres
       - key: DB_HOST
@@ -51,6 +53,8 @@ services:
     dockerContext: ./profile-portal
     plan: free
     envVars:
+      - key: PORT
+        value: "10000"
       - key: BACKEND_URL
         value: http://apex-identity-backend:8080
 
