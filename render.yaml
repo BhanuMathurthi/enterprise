@@ -52,14 +52,11 @@ services:
     plan: free
     envVars:
       - key: BACKEND_URL
-        fromService:
-          type: web
-          name: apex-identity-backend
-          property: host
+        value: http://apex-identity-backend:8080
 
 databases:
   # Managed PostgreSQL Database
   - name: apex-identity-db
     databaseName: usermanagement
-    user: postgres
     plan: free
+
