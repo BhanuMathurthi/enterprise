@@ -56,7 +56,7 @@ services:
       - key: PORT
         value: "10000"
       - key: BACKEND_URL
-        value: http://apex-identity-backend:8080
+        value: https://apex-identity-backend.onrender.com
 
 databases:
   # Managed PostgreSQL Database
