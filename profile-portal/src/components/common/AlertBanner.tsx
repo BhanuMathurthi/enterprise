@@ -55,6 +55,9 @@ export const AlertBanner: React.FC<AlertBannerProps> = ({ type, message, onClose
   };
 
   const current = stylesMap[type];
+  const cleanMessage = typeof message === 'string' && (message.includes('<html') || message.includes('<!DOCTYPE') || message.includes('<body'))
+    ? 'The service is temporarily waking up. Please refresh in a moment.'
+    : message;
 
   return (
     <div
@@ -69,7 +72,7 @@ export const AlertBanner: React.FC<AlertBannerProps> = ({ type, message, onClose
     >
       <div className="d-flex align-items-center gap-3">
         <span style={{ color: current.iconColor }}>{current.icon}</span>
-        <div className="fw-medium small" style={{ color: '#f1f5f9' }}>{message}</div>
+        <div className="fw-medium small" style={{ color: '#f1f5f9' }}>{cleanMessage}</div>
       </div>
       {onClose && (
         <button
